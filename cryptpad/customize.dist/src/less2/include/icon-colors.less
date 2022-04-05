@@ -1,0 +1,17 @@
+@import (reference) "./colortheme-all.less";
+.iconColors_main () {
+    --LessLoader_require: LessLoader_currentFile();
+}
+& {
+
+    each(@colortheme_apps, {
+        .cp-icon-color-@{key} { color: @value; }
+    });
+
+    each(@colortheme_apps, {
+        @val: @{value} !important;
+        .cp-border-color-@{key} { border-color: @val; }
+    });
+
+}
+

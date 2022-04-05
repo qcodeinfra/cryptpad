@@ -1,0 +1,198 @@
+@import (reference) "../include/infopages.less";
+@import (reference) "../include/colortheme-all.less";
+
+&.cp-page-index {
+    .infopages_main();
+
+    #cp-main {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .container {
+            @media only screen and (max-device-width : 576px) {
+                margin-top: 6em;
+            }
+        }
+        & > .cp-container {
+            flex: 1;
+            display: flex;
+            flex-flow: column;
+            justify-content: space-around;
+            justify-content: space-evenly;
+            .alert-info {
+                font-size: 16px;
+                border-radius: 0px;
+            }
+        }
+    }
+    body {
+        font-family: "Open Sans", Helvetica;
+        color: @cryptpad_text_col;
+    }
+
+    .cp-home-hero {
+        width: 100%;
+        margin-bottom: 50px;
+        align-self: center;
+        align-items: center;
+    }
+    .cp-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: @cryptpad_color_brand;
+        margin-top: 1.5em;
+        img {
+            max-width: 200px;
+            margin-bottom: 1.5em;
+        }
+        margin-left: 0;
+        h1 {
+            font-family: "IBM Plex Mono";
+            font-weight: 500;
+            //font-family: Garamond, Baskerville, "Baskerville Old Face", "Hoefler Text", "Times New Roman", Times, serif;
+            //font-family: "Raleway";
+            font-size: 3.7rem;
+        }
+        .tag-line {
+            text-align: center;
+            font-size: 1.4em;
+            color: @cp_static-link;
+        }
+    }
+
+    @callout-padding: 15px;
+    a:hover {
+        text-decoration: none;
+    }
+
+    .cp-app-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        a {
+            margin: 10px;
+            text-decoration: none;
+        }
+        @media screen and (max-width: 768px) {
+            margin-top: 40px;
+        }
+    }
+    @icons-size: 120px;
+    @icons-text-size: 24px;
+    .bs-callout {
+        display: flex;
+        align-items: stretch;
+        margin: 0;
+        box-sizing: border-box;
+        position: relative;
+        flex-flow: column;
+        //height: @icons-size;
+        width: @icons-size;
+
+        div h4 {
+            @media only screen and (min-device-width: 576px) and (max-device-width: 767px) {
+                font-size: 1.3em;
+            }
+        }
+        div {
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 16px;
+        }
+        .fa, .cptools {
+            display: flex;
+            align-items: center;
+            font-size: 3.5em;
+            justify-content: center;
+            width: @icons-size;
+            padding: 10px 10px 0px 10px;
+            //height: @icons-size - @icons-text-size;
+        }
+        .pad-button-text {
+            color: @cryptpad_text_col;
+            padding: 5px;
+        }
+    }
+    .cp-index-appitem {
+        &.cp-app-hidden {
+            display: none;
+        }
+        &.cp-app-disabled {
+            div {
+                cursor: not-allowed !important;
+            }
+            opacity: 0.5;
+        }
+    }
+    h4 {
+        margin: 0;
+    }
+    .cp-callout-more-moremsg,.cp-callout-more-lessmsg {
+        transform: none !important;
+    }
+    .bs-callout+.bs-callout {
+        margin-top: -5px;
+    }
+
+    .bs-callout:hover {
+        cursor: pointer;
+    }
+    .bs-callout:hover.cp-callout-more {
+        transform: none !important;
+    }
+
+    each(@colortheme_apps, {
+        .cp-callout-@{key} {
+            i { color: @value; }
+            &:hover {
+                @desat: desaturate(@value, 15%);
+                background-color: contrast(@cryptpad_text_col, lighten(@value, 30%), darken(@desat, 20%));
+                i { color: @cryptpad_text_col; }
+            }
+        }
+    });
+
+    .cp-hidden { display: none !important; }
+    .cp-callout-more {
+        display: inline-block;
+        align-content: center;
+        height: 2em;
+        border-radius: 1em;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        background: none;
+        width: 100%;
+        div {
+            .infopages_link();
+            color: @cryptpad_color_white;
+            .fa, .cptools {
+                font-size: inherit;
+                padding: 0;
+                width: 1em;
+                padding-left: 5px;
+            }
+        }
+    }
+
+    @media (min-width: 576px) and (max-width: 767px) {
+        .container {
+            padding-left: 0;
+            padding-right: 0;
+        }
+        div#cp-main.cp-page-index .cp-topbar .navbar-toggler-left {
+            left: 5px;
+        }
+    }
+}
+
