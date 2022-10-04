@@ -81,11 +81,13 @@ nginx frontend
 Copy both files to production machines. The `cryptpad-container-img.tar.gz` can
 be loaded on the machine with:
 
-    podman load path/to/cryptpad-container-img.tar.gz
+    gunzip -c path/to/cryptpad-container-img.tar.gz | podman load
 
 Unpack the static files into a temp dir and sync with the prod dir:
 
-    rsync -rl --chown root:root --delete-after tmpdir/ path/to/proddir/
+    mkdir tmpstatic
+    tar -C tmpstatic -xf cryptpad-static-xxx.tar.gz
+    rsync -rl --chown root:root --delete-after tmpstatic/ static/
 
 There are also a couple of config files, `config.js` and `nginx.conf`, in the root
 of this repo. These are production configs and will eventually move to
