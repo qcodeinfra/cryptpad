@@ -13,13 +13,6 @@ for customization details.
 
 ## Updating from upstream
 
-Check the current status of the local cryptpad copy with:
-
-    git log cryptpad
-
-Then go to https://github.com/xwiki-labs/cryptpad/commits/main and check where
-the upstream is at.
-
 To update local copy with upstream changes, use
 [tools/pull-cryptpad-upstream.sh](tools/pull-cryptpad-upstream.sh) script.
 For example, to pull up to an imaginary release tag xyz, execute:
@@ -32,6 +25,18 @@ Finally, `git push` to update this repo's remote.
 If instead you want to make a pull request, first create a branch. Something like
 `git checkout -b upstream-update-xyz master` should do. Then execute the above
 script and send the branch as a pull request.
+
+Then, check whether there were any changes to config files between the last deployed
+release and the newly pulled version. Most important files to check are the following.
+
+    # config.js
+    git diff v4.14.1..v5.0.0 -- cryptpad/config/config.example.js
+    # nginx.conf
+    git diff v4.14.1..v5.0.0 -- cryptpad/docs/example.nginx.conf
+    # customize/application_config.js
+    git diff v4.14.1..v5.0.0 -- cryptpad/www/common/application_config_internal.js
+
+Obviously, replace v4.14.1 and v5.0.0 with the appropriate tags.
 
 For the record, initial subtree merge from upstream was done with the following
 command:
