@@ -1731,6 +1731,14 @@ define([
         var padType = metadataMgr.getMetadata().type;
 
         var options = [];
+        options.push({
+            tag: 'div',
+            attributes: {'class': 'cp-user-menu-logo'},
+            content: h('span', [
+                h('img', {src: '/customize/CryptPad_logo_grey.svg',alt: 'CryptPad logo',}), // XXX hardcoded alt text?
+                h('span.cp-user-menu-logo-text', "CryptPad")
+            ]),
+        });
         if (config.displayNameCls) {
             var userAdminContent = [];
             if (accountName) {
@@ -2014,6 +2022,15 @@ define([
             // If no display name, do not display the parentheses
             $userbig.append($('<span>', {'class': 'account-name'}).text(accountName));
         }*/
+
+        options.forEach(function (option) {
+            var f = option.action;
+            if (!f) { return; }
+            option.action = function () {
+                f();
+                return true;
+            };
+        });
         var dropdownConfigUser = {
             buttonContent: $userButton[0],
             options: options, // Entries displayed in the menu
